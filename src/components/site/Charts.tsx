@@ -46,7 +46,7 @@ export function MiniAreaChart({
   dataKey,
   color,
 }: {
-  data: readonly object[];
+  data: object[];
   dataKey: string;
   color: string;
 }) {
@@ -80,7 +80,7 @@ export function MultiLineChart({
   metrics,
   height = 300,
 }: {
-  data: readonly object[];
+  data: object[];
   metrics: Metric[];
   height?: number;
 }) {
@@ -113,7 +113,7 @@ export function GroupedBarChart({
   metrics,
   height = 300,
 }: {
-  data: readonly object[];
+  data: object[];
   metrics: Metric[];
   height?: number;
 }) {
