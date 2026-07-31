@@ -10,14 +10,22 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as AnalysisRouteImport } from './routes/analysis'
 import { Route as ChatbotRouteImport } from './routes/chatbot'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DetectionRouteImport } from './routes/detection'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as TeamRouteImport } from './routes/team'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AnalysisRoute = AnalysisRouteImport.update({
@@ -30,6 +38,11 @@ const ChatbotRoute = ChatbotRouteImport.update({
   path: '/chatbot',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DetectionRoute = DetectionRouteImport.update({
   id: '/detection',
   path: '/detection',
@@ -40,43 +53,85 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TeamRoute = TeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/analysis': typeof AnalysisRoute
   '/chatbot': typeof ChatbotRoute
+  '/contact': typeof ContactRoute
   '/detection': typeof DetectionRoute
   '/login': typeof LoginRoute
+  '/team': typeof TeamRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/analysis': typeof AnalysisRoute
   '/chatbot': typeof ChatbotRoute
+  '/contact': typeof ContactRoute
   '/detection': typeof DetectionRoute
   '/login': typeof LoginRoute
+  '/team': typeof TeamRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/analysis': typeof AnalysisRoute
   '/chatbot': typeof ChatbotRoute
+  '/contact': typeof ContactRoute
   '/detection': typeof DetectionRoute
   '/login': typeof LoginRoute
+  '/team': typeof TeamRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/analysis' | '/chatbot' | '/detection' | '/login'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/analysis'
+    | '/chatbot'
+    | '/contact'
+    | '/detection'
+    | '/login'
+    | '/team'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/analysis' | '/chatbot' | '/detection' | '/login'
-  id: '__root__' | '/' | '/analysis' | '/chatbot' | '/detection' | '/login'
+  to:
+    | '/'
+    | '/about'
+    | '/analysis'
+    | '/chatbot'
+    | '/contact'
+    | '/detection'
+    | '/login'
+    | '/team'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/analysis'
+    | '/chatbot'
+    | '/contact'
+    | '/detection'
+    | '/login'
+    | '/team'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   AnalysisRoute: typeof AnalysisRoute
   ChatbotRoute: typeof ChatbotRoute
+  ContactRoute: typeof ContactRoute
   DetectionRoute: typeof DetectionRoute
   LoginRoute: typeof LoginRoute
+  TeamRoute: typeof TeamRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -86,6 +141,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/analysis': {
@@ -102,6 +164,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ChatbotRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/detection': {
       id: '/detection'
       path: '/detection'
@@ -116,15 +185,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/team': {
+      id: '/team'
+      path: '/team'
+      fullPath: '/team'
+      preLoaderRoute: typeof TeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   AnalysisRoute: AnalysisRoute,
   ChatbotRoute: ChatbotRoute,
+  ContactRoute: ContactRoute,
   DetectionRoute: DetectionRoute,
   LoginRoute: LoginRoute,
+  TeamRoute: TeamRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
