@@ -138,38 +138,43 @@ export async function getUsage(
   return remote ?? mockUsage[range];
 }
 
+function buildUsage(
+  labels: string[],
+  values: number[],
+  target: number,
+): UsagePoint[] {
+  return labels.map((label, i) => ({ label, usage: values[i] ?? 0, target }));
+}
+
 export const mockUsage: Record<"daily" | "weekly" | "monthly", UsagePoint[]> = {
-  daily: [
-    "00h",
-    "04h",
-    "08h",
-    "12h",
-    "16h",
-    "20h",
-  ].map((label, i) => ({ label, usage: [8, 6, 19, 26, 31, 22][i], target: 24 })),
-  weekly: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((label, i) => ({
-    label,
-    usage: [142, 158, 131, 176, 189, 121, 104][i],
-    target: 160,
-  })),
-  monthly: [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ].map((label, i) => ({
-    label,
-    usage: [610, 585, 640, 702, 780, 845, 910, 890, 760, 690, 640, 620][i],
-    target: 750,
-  })),
+  daily: buildUsage(
+    ["00h", "04h", "08h", "12h", "16h", "20h"],
+    [8, 6, 19, 26, 31, 22],
+    24,
+  ),
+  weekly: buildUsage(
+    ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    [142, 158, 131, 176, 189, 121, 104],
+    160,
+  ),
+  monthly: buildUsage(
+    [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    [610, 585, 640, 702, 780, 845, 910, 890, 760, 690, 640, 620],
+    750,
+  ),
 };
 
 export const consumptionByCategory = [
